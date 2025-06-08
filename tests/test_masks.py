@@ -15,3 +15,4 @@ def test_get_mask_account():
     expected = "**3456"
     result = get_mask_account("123456")
     assert expected == result
+
