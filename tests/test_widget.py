@@ -20,10 +20,10 @@ def test_mask_account_card(entry_value, expected):
 #     captured_output = capsys.readouterr()
 #     print(captured_output)
 
-def test_mask_account_card_error():
+def test_mask_account_card_error()-> None:
     result = mask_account_card("Visa Platinum")
     expected = "VisaPlatinum Введен неверный номер карты!"
     assert expected == result
 
-def test_get_date():
+def test_get_date()-> None:
     assert get_date("2025-06-08T18:14:18.671407") == "08.06.2025"
