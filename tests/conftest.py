@@ -1,5 +1,6 @@
 import pytest
 
+
 @pytest.fixture()
 def account_number():
     return "Счет 73654108430135874305"
