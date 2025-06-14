@@ -12,4 +12,4 @@ def sort_by_date(info_list: List[Dict], reverse: bool = True) -> List[Dict]:
     """Функция, которая принимает список словарей и параметр, задающий порядок сортировки.
     Возвращает новый список, отсортированный по дате
     """
-    return sorted(info_list, key=lambda x: x["date"], reverse=True)
+    return sorted(info_list, key=lambda x: x["date"], reverse=reverse)

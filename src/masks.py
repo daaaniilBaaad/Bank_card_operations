@@ -3,7 +3,7 @@ def get_mask_card_number(card_number: str) -> str:
     card_number = card_number.replace(" ", "")
     # проверяем хватает цифр в номере карты
     if len(card_number) != 16:
-        print("Введен неверный номер карты!")
+        return "Введен неверный номер карты!"
 
     result = []  # список для хранения замаскированного номера карты
     counter = 0  # счетчик цифр в номере карты, для замены на *
@@ -36,3 +36,5 @@ def get_mask_account(card_number: str) -> str:
 
     last_part = str(card_number[-4:])
     return f"**{last_part}"
+
+#print(get_mask_card_number('1234123412341234'))

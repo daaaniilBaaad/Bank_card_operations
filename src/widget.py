@@ -27,3 +27,7 @@ def get_date(user_date: Union[str]) -> Union[str]:
     new_date = date_format.strftime("%d.%m.%Y")
 
     return new_date
+
+# print(mask_account_card("Счет 73654108430135874305"))
+# print(mask_account_card("Visa Platinum 7365410843013587"))
+# print(mask_account_card("Visa Platinum"))
