@@ -64,6 +64,9 @@ _opers = [
     ]
 
 def filter_by_currency(operations: list[dict], currency: str) -> Generator:
+    """
+    Функция, которая принимает список транзакций, и возвращает генератор выдающий списки транзакций по валюте
+    """
     for operation in operations:
         if operation["operationAmount"]["currency"]["code"] == currency:
             yield operation
@@ -76,6 +79,7 @@ def transaction_descriptions(transactions_list: list) -> Generator[str]:
 
 
 def card_number_generator(start: int, end: int) -> Generator:
+    """Функция генератор, которая выдает номера банковских карт в формате XXXX XXXX XXXX XXXX"""
     for i in range(start, end+1):
         card_number = []
         num = str(i).zfill(16)
