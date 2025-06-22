@@ -1,10 +1,11 @@
 import pytest
+
 from src.decorators import log
 
 
-def test_log_error_console(capsys):
+def test_log_error_console(capsys: pytest.CaptureFixture[str]) -> None:
     @log()
-    def foo(x, y):
+    def foo(x: int, y: int) -> int:
         return x + y
 
     with pytest.raises(TypeError):
@@ -13,16 +14,16 @@ def test_log_error_console(capsys):
     assert "foo - <class 'TypeError'> - args: (2, '3'), kwargs: {}\n\n" == captured.out
 
 
-def test_log_success_file():
-    file_name = "tests/test.txt"
+def test_log_success_file() -> None:
+    file_name: str = "tests/test.txt"
 
     @log(filename=file_name)
-    def foo(x, y):
+    def foo(x: int, y: int) -> int:
         return x + y
 
-    result = foo(2, 3)
+    result: int = foo(2, 3)
     assert result == 5
 
     with open(file_name, "r", encoding="utf-8") as f:
-        content = f.readlines()
+        content: list[str] = f.readlines()
         assert content[-1] == "foo - OK - 5\n"
