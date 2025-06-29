@@ -1,25 +1,24 @@
-import unittest
-from unittest.mock import patch, Mock
 import sys
+import unittest
 from pathlib import Path
-from typing import List, Dict, Any
+from unittest.mock import Mock, patch
+
+from src.utils import load_transactions
 
 # Добавляем путь к src в PYTHONPATH
 sys.path.append(str(Path(__file__).parent.parent))
-
-from src.utils import load_transactions
 
 
 class TestLoadTransactions(unittest.TestCase):
 
     @patch("os.path.isfile", return_value=False)
-    def test_file_not_exists(self, mock_isfile):
+    def test_file_not_exists(self, mock_isfile: Mock) -> None:
         """Файл не существует - возвращаем []"""
         result = load_transactions("non_existent.json")
         self.assertEqual(result, [])
 
     @patch("os.path.isfile", return_value=True)
-    def test_data_is_not_list(self, mock_isfile):
+    def test_data_is_not_list(self, mock_isfile: Mock) -> None:
         """Данные не список - возвращаем []"""
         mock_file = Mock()
         mock_file.read = Mock(return_value='{"key": "value"}')
@@ -31,7 +30,7 @@ class TestLoadTransactions(unittest.TestCase):
             self.assertEqual(result, [])
 
     @patch("os.path.isfile", return_value=True)
-    def test_invalid_json(self, mock_isfile):
+    def test_invalid_json(self, mock_isfile: Mock) -> None:
         """Невалидный JSON - возвращаем []"""
         mock_file = Mock()
         mock_file.read = Mock(return_value="{invalid json}")
@@ -43,7 +42,7 @@ class TestLoadTransactions(unittest.TestCase):
             self.assertEqual(result, [])
 
     @patch("os.path.isfile", return_value=True)
-    def test_valid_case(self, mock_isfile):
+    def test_valid_case(self, mock_isfile: Mock) -> None:
         """Корректные данные - возвращаем список транзакций"""
         mock_file = Mock()
         mock_file.read = Mock(return_value='[{"id": 1, "amount": 100}]')

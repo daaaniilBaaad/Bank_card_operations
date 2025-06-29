@@ -1,10 +1,3 @@
-# import requests
-
-
-# def convert_to_rub(transaction: dict) -> float:
-#     url = f"https://api.apilayer.com/exchangerates_data/convert?to={to}&from={from}&amount={amount}"
-#     headers = {"apikey": "qCR2KM8wWDfsJ77g4oC2YrMnhXudDgFJ"}
-
 import os
 
 import requests
