@@ -16,3 +16,6 @@ foo - OK - 5
 foo - OK - 5
 foo - OK - 5
 foo - OK - 5
+foo - OK - 5
+foo - OK - 5
+foo - OK - 5

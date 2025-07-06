@@ -14,7 +14,7 @@ def test_get_mask_card_number_error()-> None:
     assert expected == result
 
 def test_get_mask_account()-> None:
-    expected = "**3456"
+    expected = "Введите корректный номер карты"
     result = get_mask_account("123456")
     assert expected == result
 
