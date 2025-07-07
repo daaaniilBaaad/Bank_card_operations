@@ -1,6 +1,8 @@
 import json
 import logging
 import os
+import re
+from collections import Counter
 from pathlib import Path
 from typing import List, Union
 
@@ -37,6 +39,27 @@ def read_json_file(file_path: Union[str, Path]) -> List[dict]:
     except Exception as e:
         logger.error(f"Неожиданная ошибка при чтении файла {file_path}: {str(e)}", exc_info=True)
         return []
+
+
+def process_bank_search(data: list[dict], search: str) -> list[dict]:
+    """функция фильтрует список операций по заданным словам"""
+    result = []
+    re_pattern = re.compile(search, re.IGNORECASE)
+    for operation in data:
+        if re_pattern.search(str(operation.get("description", ""))):
+            result.append(operation)
+    return result
+
+
+def process_bank_operations(data: list[dict], categories: list) -> dict:
+    """Функция принимающая список словарей с данными об операциях и список категорий
+    и возвращает словарь с ключами - названия категорий, а значения - кол-во операций
+    """
+    count_categories = []
+    for operation in data:
+        if operation.get("description", "") in categories:
+            count_categories.append(operation.get("description", ""))
+    return dict(Counter(count_categories))
 
 
 if __name__ == "__main__":
