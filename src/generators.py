@@ -1,4 +1,4 @@
-from typing import Generator
+from typing import Generator, Literal, Iterator, Any
 
 _opers = [
     {
@@ -64,13 +64,29 @@ _opers = [
 ]
 
 
-def filter_by_currency(operations: list[dict], currency: str) -> Generator:
-    """
-    Функция, которая принимает список транзакций, и возвращает генератор выдающий списки транзакций по валюте
-    """
-    for operation in operations:
-        if operation["operationAmount"]["currency"]["code"] == currency:
-            yield operation
+# def filter_by_currency(operations: list[dict], currency: Literal["USD", "RUB"]) -> Generator:
+#     """
+#     Функция, которая принимает список транзакций, и возвращает генератор выдающий списки транзакций по валюте
+#     """
+#     for operation in operations:
+#         if operation["currency_code"] == currency:
+#             yield operation
+# def filter_by_currency(operations: list[dict], currency: Literal["USD", "RUB"]) -> Iterator[dict[Any, Any]]:
+#     """
+#     Функция, которая принимает список транзакций, и возвращает генератор выдающий списки транзакций по валюте
+#     """
+#     for operation in operations:
+#         # Используем .get() вместо прямого обращения по ключу
+#         if operation.get("currency_code") == currency:
+#             yield operation
+def filter_by_currency(transactions: list[dict], currency: str) -> filter:
+    """Фильтрует транзакции по валюте"""
+
+    def currency_filter(operation: dict) -> bool:
+        # Проверяем наличие ключа и сравниваем значение
+        return str(operation.get("currency_code", "")).upper() == currency.upper()
+
+    return filter(currency_filter, transactions)
 
 
 def transaction_descriptions(transactions_list: list) -> Generator[str]:
